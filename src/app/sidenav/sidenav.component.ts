@@ -1,4 +1,4 @@
-import { Component, OnInit, Output ,EventEmitter} from '@angular/core';
+import { Component, OnInit, Output ,EventEmitter, HostListener} from '@angular/core';
 import { navbarData } from './nav-data';
 
 
@@ -20,8 +20,18 @@ export class SidenavComponent implements OnInit {
   screenWidth=0;
 
   constructor() { }
+  @HostListener('window:resize', ['$event'])
+
+  onResize(event:any){
+      if(this.screenWidth <= 768){
+        this.collapsed = false;
+        this.onToggleSideNav.emit({collapsed:this.collapsed,screenWidth:this.screenWidth});
+    }
+
+  }
 
   ngOnInit(): void {
+    this.screenWidth=window.innerWidth;
   }
 
 
