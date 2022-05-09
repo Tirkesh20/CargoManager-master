@@ -1,3 +1,4 @@
+import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, Output ,EventEmitter, HostListener} from '@angular/core';
 import { navbarData } from './nav-data';
 
@@ -10,7 +11,34 @@ interface SideNavToggle{
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.scss']
+  styleUrls: ['./sidenav.component.scss'],
+  animations:[
+    trigger('fadeInOut',[
+        transition(':enter',[
+          style({opacity:0}),
+          animate('350ms',
+            style({opacity:1})
+          )
+        ])
+        ,
+        transition(':leave',[
+          style({opacity:1}),
+          animate('350ms',
+            style({opacity:0})
+          )
+        ])
+    ]),
+    trigger('rotata',[
+      transition('enter',[
+        animate('1000ms',
+          keyframes([
+            style({transform:'rotate(0deg',offset:'0'}),
+            style({transform:'rotate(2turn',offset:'1'})
+          ])
+        )
+      ])
+    ])
+  ]
 })
 export class SidenavComponent implements OnInit {
 
@@ -22,7 +50,7 @@ export class SidenavComponent implements OnInit {
   constructor() { }
   @HostListener('window:resize', ['$event'])
 
-  onResize(event:any){
+  onResize(event: any){
       if(this.screenWidth <= 768){
         this.collapsed = false;
         this.onToggleSideNav.emit({collapsed:this.collapsed,screenWidth:this.screenWidth});
@@ -41,7 +69,7 @@ export class SidenavComponent implements OnInit {
   }
 
   closeSidenav():void{
-    this.collapsed=false;
+    this.collapsed= false;
     this.onToggleSideNav.emit({collapsed:this.collapsed,screenWidth:this.screenWidth})
 
   }

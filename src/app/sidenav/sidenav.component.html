@@ -1,8 +1,8 @@
 <div class="sidenav"[ngClass]="collapsed ?'sidenav-collapsed':'sidenav'">
 
   <div class="logo-container">
-    <button class="logo"(click)="toggleCollapse()"></button>
-     <div class="logo-text" *ngIf="collapsed">Angular</div>
+    <button class="logo"(click)="toggleCollapse()">A</button>
+     <div class="logo-text"  *ngIf="collapsed">Angular</div>
     <button class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
       <i class="fa fa-close" aria-hidden="true"></i>
     </button>
@@ -13,8 +13,10 @@
         routerLinkActive="active"
         [routerLinkActiveOptions]="{exact:true}"
       >
-        <i class="sidenav-link-icon"  [class]="data.icon"style="font-size:30px"></i>
-        <span class="sidenav-link-text" *ngIf="collapsed">{{data.label}}</span>
+        <i class="sidenav-link-icon"  [class]="data.icon"></i>
+        <span class="sidenav-link-text"  *ngIf="collapsed">
+          {{data.label}}
+        </span>
       </a>
     </li>
   </ul>

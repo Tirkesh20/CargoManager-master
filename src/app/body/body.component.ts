@@ -15,13 +15,9 @@ export class BodyComponent implements OnInit {
   }
 
    getBodyClass():string{
-    let styleClass=''
-
-    if (this.collapsed&&this.screenWidth>768){
-      styleClass='body-trimmed';
-    }else if(this.collapsed&&this.screenWidth<=768){
-      styleClass='body-md-screen'
+    if (this.collapsed&&this.screenWidth>=768){
+      return'body-trimmed'
     }
-    return styleClass;
+    return 'body-md-screen';
   }
 }
